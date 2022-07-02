@@ -53,7 +53,7 @@ class RegisterUser(Resource):
             return make_response(jsonify({"msg": "Registrasi berhasil!", "email":email, "username":username}), 201)
         else:
             return make_response(jsonify(
-                {"msg": "Username yang anda masukan sudah terdaftar!"}), 404)
+                {"msg": "Username atau email yang anda masukan sudah terdaftar!"}), 404)
 
 
 class LoginUser(Resource):
@@ -163,8 +163,8 @@ class DeleteShopping(Resource):
 
 
 # setup resource endpoint
-api.add_resource(RegisterUser, "/api/register", methods=["POST"])
-api.add_resource(LoginUser, "/api/login", methods=["POST"])
+api.add_resource(RegisterUser, "/api/signup", methods=["POST"])
+api.add_resource(LoginUser, "/api/signin", methods=["POST"])
 api.add_resource(GetAllUsers, "/api/users", methods=["GET"])
 api.add_resource(GetAllShopping, "/api/shopping", methods=["GET"])
 api.add_resource(CreateShopping, "/api/shopping", methods=["POST"])
