@@ -61,6 +61,9 @@ class LoginUser(Resource):
         email = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
+        if user is None:
+            return make_response(jsonify({"msg": "Login gagal! Silahkan cek kembali Email dan Password"}), 404)
+        
         check = sha256_crypt.verify(password, user.password)
         if user and check:
             token = jwt.encode(
@@ -71,6 +74,7 @@ class LoginUser(Resource):
             return make_response(jsonify({"msg": "Login Sukses", "token": token.decode()}), 200)
         else:
             return make_response(jsonify({"msg": "Login gagal! Silahkan cek kembali Email dan Password"}), 404)
+            
 
 
 class GetAllUsers(Resource):
